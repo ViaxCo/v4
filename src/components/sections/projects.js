@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Link, useStaticQuery, graphql } from 'gatsby';
+import { Icon } from '@components/icons';
+import { socialMedia, srConfig } from '@config';
+import { usePrefersReducedMotion } from '@hooks';
+import sr from '@utils/sr';
+import { graphql, useStaticQuery } from 'gatsby';
+import React, { useEffect, useRef, useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
-import { srConfig } from '@config';
-import sr from '@utils/sr';
-import { Icon } from '@components/icons';
-import { usePrefersReducedMotion } from '@hooks';
 
 const StyledProjectsSection = styled.section`
   display: flex;
@@ -30,16 +30,18 @@ const StyledProjectsSection = styled.section`
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     grid-gap: 15px;
     position: relative;
-    margin-top: 50px;
+    margin-top: 20px;
 
     @media (max-width: 1080px) {
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     }
   }
-
+  .more-button-link {
+    margin-top: 80px;
+  }
   .more-button {
     ${({ theme }) => theme.mixins.button};
-    margin: 80px auto 0;
+    margin: 0 auto;
   }
 `;
 
@@ -189,7 +191,7 @@ const Projects = () => {
     }
   `);
 
-  const [showMore, setShowMore] = useState(false);
+  const [showMore] = useState(false);
   const revealTitle = useRef(null);
   const revealArchiveLink = useRef(null);
   const revealProjects = useRef([]);
@@ -266,10 +268,6 @@ const Projects = () => {
     <StyledProjectsSection>
       <h2 ref={revealTitle}>Other Noteworthy Projects</h2>
 
-      <Link className="inline-link archive-link" to="/archive" ref={revealArchiveLink}>
-        view the archive
-      </Link>
-
       <ul className="projects-grid">
         {prefersReducedMotion ? (
           <>
@@ -301,9 +299,14 @@ const Projects = () => {
         )}
       </ul>
 
-      <button className="more-button" onClick={() => setShowMore(!showMore)}>
-        Show {showMore ? 'Less' : 'More'}
-      </button>
+      <a
+        className="more-button-link"
+        href={socialMedia.find(x => x.name === 'GitHub').url}
+        aria-label="GitHub Link"
+        target="_blank"
+        rel="noreferrer">
+        <button className="more-button">Show All</button>
+      </a>
     </StyledProjectsSection>
   );
 };
