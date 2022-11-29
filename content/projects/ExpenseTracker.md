@@ -2,7 +2,7 @@
 date: '2'
 title: 'Expense Tracker'
 github: 'https://github.com/ViaxCo/expense-tracker'
-external: 'https://viaxco-expense-tracker.herokuapp.com/'
+external: 'https://viaxco-expense-tracker.onrender.com/'
 tech:
   - React
   - Node
